@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path="api/v1/todo")
-public class ToDoController {
-	private final ToDoService toDoService;
+public class ToDoRestController {
 	
 	@Autowired
-	public ToDoController(ToDoService toDoService) {
-		this.toDoService = toDoService;
-	}
+	private  ToDoService toDoService;
+	
+	
+	
 	
 	@GetMapping
 	public List<ToDo> getToDos(){

@@ -2,7 +2,13 @@ package com.glen.todoapp.todo;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
 public class ToDo {
+	@Id
 	private Integer id;
 	private String title;
 	private String task;
