@@ -3,13 +3,21 @@ package com.glen.todoapp.todo;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 public class ToDo {
 	@Id
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "todo_sequence")
+	@SequenceGenerator(
+			name = "todo_sequence",
+			sequenceName = "todo_sequence",
+			allocationSize = 1)
+	private Long id;
 	private String title;
 	private String task;
 	
@@ -17,17 +25,22 @@ public class ToDo {
 		
 	}
 	
-	public ToDo(Integer id, String title, String task) {
+	public ToDo(Long id, String title, String task) {
 		this.id = id;
 		this.title = title;
 		this.task = task;
 	}
+	
+	public ToDo(String title, String task) {
+		this.title = title;
+		this.task = task;
+	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

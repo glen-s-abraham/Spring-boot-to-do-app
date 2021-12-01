@@ -1,10 +1,8 @@
 package com.glen.todoapp.todo;
 
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 import javax.transaction.Transactional;
 
@@ -21,26 +19,26 @@ public class ToDoService {
 		return toDoRepository.findAll();
 	}
 
-	public void addToDo(ToDo todo) {
-		 toDoRepository.save(todo);
+	public ToDo addToDo(ToDo todo) {
+		 return toDoRepository.save(todo);
 	}
 
 
-	public void deleteToDo(int id) {
-		toDoRepository.findById(id)
-		.orElseThrow(()->new IllegalStateException("Invalid id"));
-		toDoRepository.deleteById(id);
+	public ToDo deleteToDo(Long id) {
+		ToDo taskToDelet=toDoRepository.findById(id).orElse(null);
+		if(taskToDelet!=null)
+			toDoRepository.deleteById(id);
+		return taskToDelet;
 	}
 	
 	@Transactional
-	public void updateToDo(int id, String title, String task) {
-		ToDo todo = toDoRepository.findById(id)
-				.orElseThrow(()->new IllegalStateException("Invalid id"));
-	
+	public ToDo updateToDo(Long id, String title, String task) {
+		ToDo taskToEdit=toDoRepository.findById(id).orElse(null);
 		if(title!=null && title.length()>0)
-			todo.setTitle(title);
+			taskToEdit.setTitle(title);
 		if(task!=null && task.length()>0)
-			todo.setTask(task);
+			taskToEdit.setTask(task);
+		return taskToEdit;
 	}
 
 }

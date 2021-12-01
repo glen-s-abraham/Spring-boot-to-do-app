@@ -21,29 +21,27 @@ public class ToDoRestController {
 	private  ToDoService toDoService;
 	
 	
-	
-	
 	@GetMapping
 	public List<ToDo> getToDos(){
 		return toDoService.getToDos();
 	}
 	
 	@PostMapping
-	public void createToDo(@RequestBody ToDo todo) {
-		toDoService.addToDo(todo);
+	public ToDo createToDo(@RequestBody ToDo todo) {
+		return toDoService.addToDo(todo);
 	}
 	
 	@DeleteMapping(path = "{id}")
-	public void deleteToDo(@PathVariable("id") int id) {
-		toDoService.deleteToDo(id);
+	public ToDo deleteToDo(@PathVariable("id") Long id) {
+		return toDoService.deleteToDo(id);
 	}
 	
 	@PutMapping(path  = "{id}")
-	public void updateToDo(
-			@PathVariable("id")int id,
+	public ToDo updateToDo(
+			@PathVariable("id")Long id,
 			@RequestParam(required=false) String title,
 			@RequestParam(required=false) String task) {
-		toDoService.updateToDo(id,title,task);
+		return toDoService.updateToDo(id,title,task);
 	}
 	
 	
